@@ -1,0 +1,28 @@
+﻿[
+  {
+    "hosts": "all",
+    "become": true,
+    "become_user": "root",
+    "vars": {
+      "user": "root",
+      "password": "toor"
+    },
+    "tasks": [
+      {
+        "name": "Create user test with password",
+        "become": "yes",
+        "become_user": "root",
+        "user": {
+          "name": "test",
+          "password": "{{ 'pass' | password_hash('sha512') }}",
+          "shell": "/bin/bash",
+          "update_password": "on_create"
+        }
+      },
+      {
+        "name": "Force test to change password",
+        "command": "chage -d 0 test"
+      }
+    ]
+  }
+]
