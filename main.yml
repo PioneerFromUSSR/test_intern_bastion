@@ -16,5 +16,4 @@
         shell: /bin/bash
         update_password: on_create
     - name: Force test to change password
-      shell: change -d 0 test
-      when: test.changed
+      command: chage -d 0 test
